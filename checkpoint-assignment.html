@@ -1,0 +1,5 @@
+*Absolute positioning:* Absolute positioning to an element makes it independent from everything around it. It will not be affected by any other element around it and elements can overlap each other.
+ 
+*Relative Positioning:* Relative positioning keeps elements in a relative coordinate position to each other. If things move around, for instance if you had an image/object in between two other objects and shift it, the other objects will stay in their position. Moving one object in a relative coordinate system does not affect the other elements.
+ 
+Margin, border, padding, and content can all be considered their own box in CSS. When using the default browser box sizing to adjust an element such as padding or border, the content (width and) height will adjust relative to the change. When we add something to the **default browser box** sizing such as padding, the content increases to accommodate the change. However, if we do not want to impact the box height and width when adding padding and borders we can use **box-sizing: border-box.** This setting will insure content will stay the same if the other boxes (margin, border, padding) are adjusted.  
