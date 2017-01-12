@@ -1,17 +1,20 @@
  var pointsArray = document.getElementsByClassName('point');
  
  var animatePoints = function(points) {
-    var revealPoint = function(indexOfPoint){  //replaces var revealFirstPoint = function() for all three points         
-        points[indexOfPoint].style.opacity = 1;
-        points[indexOfPoint].style.transform = "scaleX(1) translateY(0)";
-        points[indexOfPoint].style.msTransform = "scaleX(1) translateY(0)";
-        points[indexOfPoint].style.WebkitTransform = "scaleX(1) translateY(0)";
+    var revealPoint = function(point){  //replaces var revealFirstPoint = function() for all three points         
+        point.style.opacity = 1;
+        point.style.transform = "scaleX(1) translateY(0)";
+        point.style.msTransform = "scaleX(1) translateY(0)";
+        point.style.WebkitTransform = "scaleX(1) translateY(0)";
     };
+
+ forEach(points, revealPoint); //revealPoint is the callback
+
             
-    for(var i=0; i<points.length; i++){ //replaces revealFirstPoint();...etc. 
+    /*for(var i=0; i<points.length; i++){ //replaces revealFirstPoint();...etc. 
         revealPoint(i);
     }
-      
+      */
 };
             
                 
