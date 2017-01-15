@@ -17,13 +17,28 @@ var albumMarconi = {
      artist: 'Guglielmo Marconi',
      label: 'EM',
      year: '1909',
-     albumArtUrl: 'assets/images/album_covers/20.png',
+     albumArtUrl: 'assets/images/album_covers/22.png',
      songs: [
          { title: 'Hello, Operator?', duration: '1:01' },
          { title: 'Ring, ring, ring', duration: '5:01' },
          { title: 'Fits in your pocket', duration: '3:21'},
          { title: 'Can you hear me now?', duration: '3:14' },
          { title: 'Wrong phone number', duration: '2:15'}
+     ]
+ };
+
+var albumWalkEarth = {
+     title: 'My Rock',
+     artist: 'Walk Off The Earth',
+     label: 'SlapDash Records',
+     year: '2010',
+     albumArtUrl: 'assets/images/album_covers/20.png',
+     songs: [
+         { title: 'Once in a While', duration: '3:19' },
+         { title: 'Julia', duration: '2:40' },
+         { title: 'Money Tree', duration: '3:12'},
+         { title: 'Coolin', duration: '3:50' },
+         { title: '100 Proof Life', duration: '3:53'}
      ]
  };
 
@@ -63,4 +78,19 @@ var setCurrentAlbum = function(album) {
 
  window.onload = function() {
      setCurrentAlbum(albumPicasso);
+     console.log(document.getElementsByClassName("album-cover-art"));
+     document.getElementsByClassName("album-cover-art")[0].addEventListener('click', function(event){
+         var currentTitle = document.getElementsByClassName('album-view-title')[0].innerHTML;
+         if(currentTitle === "The Colors"){
+             setCurrentAlbum(albumMarconi); 
+         }
+         else if(currentTitle === "The Telephone") {
+             setCurrentAlbum(albumWalkEarth);
+                
+         }
+         else{
+             setCurrentAlbum(albumPicasso);
+         }
+         
+    });
  };
