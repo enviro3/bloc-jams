@@ -76,21 +76,21 @@ var setCurrentAlbum = function(album) {
      }
  };
 
+var albumsArray = [albumPicasso, albumMarconi, albumWalkEarth];
  window.onload = function() {
-     setCurrentAlbum(albumPicasso);
+     setCurrentAlbum(albumsArray[0]);
      console.log(document.getElementsByClassName("album-cover-art"));
+     var i = 1;
      document.getElementsByClassName("album-cover-art")[0].addEventListener('click', function(event){
-         var currentTitle = document.getElementsByClassName('album-view-title')[0].innerHTML;
-         if(currentTitle === "The Colors"){
-             setCurrentAlbum(albumMarconi); 
-         }
-         else if(currentTitle === "The Telephone") {
-             setCurrentAlbum(albumWalkEarth);
-                
-         }
-         else{
-             setCurrentAlbum(albumPicasso);
-         }
+         console.log(i);
+         setCurrentAlbum(albumsArray[i]);
+         i++;   
          
+         if(i === albumsArray.length){   //if last album is last on array, loops back to first 
+             i = 0;
+         }
     });
  };
+                                                                            
+                                                                            
+
