@@ -134,7 +134,6 @@ var pauseButtonTemplate = '<a class="album-song-button"><span class="ion-pause">
          //only target individual song rows during event del
          if(event.target.parentElement.className === 'album-view-song-item') {
              //change the content from the number to the play button's HTML
-             event.target.parentElement.querySelector('.song-item-number').innerHTML = playButtonTemplate;
              var songItem = getSongItem(event.target);
              if(songItem.getAttribute('data-song-number') !== currentlyPlayingSong){
                  songItem.innerHTML = playButtonTemplate;
