@@ -105,6 +105,11 @@ var setCurrentAlbum = function(album) {
      }
  };
 
+var setSong = function(songNumber){
+    currentlyPlayingSongNumber = songNumber;
+    currentSongFromAlbum = songNumber; 
+    
+}
 //album button templates
 
 var playButtonTemplate = '<a class="album-song-button"><span class="ion-play"></span></a>';
