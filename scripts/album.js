@@ -180,3 +180,5 @@ var playerBarPauseButton = '<span class="ion-pause"></span>';
      $previousButton.click(previousSong);
      $nextButton.click(nextSong);
  });
+
+//trying to commit 19 again
