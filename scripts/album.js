@@ -4,8 +4,9 @@ var setSong = function(songNumber) {
     
 } 
 
-var getSongNumberCell(number){
+var getSongNumberCell = function(number){
     //return the song number element that corresponds to that song number
+    return $('.song-item-number[data-song-number="' + number + '"]')[0];
 }
 
 var createSongRow = function(songNumber, songName, songLength) {
@@ -24,7 +25,7 @@ var createSongRow = function(songNumber, songName, songLength) {
 
         if (currentlyPlayingSongNumber !== null) {
             // Revert to song number for currently playing song because user started playing new song.
-            var currentlyPlayingCell = $('.song-item-number[data-song-number="' + currentlyPlayingSongNumber + '"]');
+            var currentlyPlayingCell = getSongNumberCell(currentlyPlayingSongNumber);
             currentlyPlayingCell.html(currentlyPlayingSongNumber);
         }
         if (currentlyPlayingSongNumber !== songNumber) {
