@@ -1,3 +1,21 @@
+var togglePlayFromPlayerBar = function(){
+   if(currentSoundFile === null){
+       return;
+   }
+    if(currentSoundFile.isPaused()){
+      getSongNumberCell(currentlyPlayingSongNumber).html(pauseButtonTemplate); 
+        $('.main-controls .play-pause').html(playerBarPauseButton);
+        currentSoundFile.play();   
+    }
+    else{
+        getSongNumberCell(currentlyPlayingSongNumber).html(playButtonTemplate); 
+        $('.main-controls .play-pause').html(playerBarPlayButton);
+        currentSoundFile.pause();  
+    }
+      
+    
+}
+
 var setSong = function(songNumber) {
      if (currentSoundFile) {
          currentSoundFile.stop();
@@ -142,22 +160,12 @@ var nextSong = function(){
     var currentIndex = trackIndex(currentAlbum, currentSongFromAlbum);
     currentIndex++;
     //update the HTML of previous song's .song-item-number element with a number 
-    getSongNumberCell(currentlyPlayingSongNumber).html(currentlyPlayingSongNumber); 
-    currentlyPlayingSongNumber++;
-
-    //set a new current song to currentSongFromAlbum
-    console.log('The current index is ' + currentIndex + ' the length of songs is ' + currentAlbum.songs.length);
-    console.log("CI " + currentIndex);
-    console.log("#" + currentlyPlayingSongNumber);
     
-    if(currentlyPlayingSongNumber === currentAlbum.songs.length + 1){
-        currentlyPlayingSongNumber = 1;
+    if(currentIndex === currentAlbum.songs.length){
         currentIndex = 0;
     }
-    
-    console.log("After If Index: " + currentIndex);
-    console.log("After If Number: " + currentlyPlayingSongNumber);
-    currentSongFromAlbum = currentAlbum.songs[currentIndex];
+    getSongNumberCell(currentlyPlayingSongNumber).html(currentlyPlayingSongNumber); 
+    setSong(currentIndex + 1);
     
     currentSoundFile.play();
     
@@ -167,7 +175,6 @@ var nextSong = function(){
     getSongNumberCell(currentlyPlayingSongNumber).html(pauseButtonTemplate);
     
     
-    console.log(currentlyPlayingSongNumber);
 }
 
 var previousSong = function(){
@@ -175,21 +182,13 @@ var previousSong = function(){
     var currentIndex = trackIndex(currentAlbum, currentSongFromAlbum);
     currentIndex--;
     //update the HTML of previous song's .song-item-number element with a number
-    getSongNumberCell(currentlyPlayingSongNumber).html(currentlyPlayingSongNumber);
-    //console.log(belowNumber-1);
-    currentlyPlayingSongNumber--;
-    
-    console.log("CI " + currentIndex);
-    console.log("#" + currentlyPlayingSongNumber);
-    
-    if(currentlyPlayingSongNumber === 0){
-        currentlyPlayingSongNumber = currentAlbum.songs.length;
-        currentIndex = currentAlbum.songs.length - 1;
+  
+    if(currentIndex === -1){
+        currentIndex = currentAlbum.songs.length -1;
     }
+    getSongNumberCell(currentlyPlayingSongNumber).html(currentlyPlayingSongNumber);
+    setSong(currentIndex +1);
     
-    console.log("After If Index: " + currentIndex);
-    console.log("After If Number: " + currentlyPlayingSongNumber);
-    currentSongFromAlbum = currentAlbum.songs[currentIndex];
     
     currentSoundFile.play();
     updatePlayerBarSong();
@@ -214,12 +213,14 @@ var currentSongFromAlbum = null;
 var currentSoundFile = null;
 var currentVolume = 80;
 
- var $previousButton = $('.main-controls .previous');
- var $nextButton = $('.main-controls .next');
+var $mainControls = $('.main-controls .play-pause');
+var $previousButton = $('.main-controls .previous');
+var $nextButton = $('.main-controls .next');
 
  $(document).ready(function() {
      setCurrentAlbum(albumPicasso);
      $previousButton.click(previousSong);
      $nextButton.click(nextSong);
+     $mainControls.click(togglePlayFromPlayerBar);
  });
 
