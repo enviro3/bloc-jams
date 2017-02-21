@@ -47,15 +47,14 @@ var getSongNumberCell = function(number){
     return $('.song-item-number[data-song-number="' + number + '"]');
 }
 
-var createSongRow = function(songNumber, songName, songLength) {
-     var template =
+var createSongRow = function(songNumber, songName, songLength) { 
+    var template =
         '<tr class="album-view-song-item">'
       + '  <td class="song-item-number" data-song-number="' + songNumber + '">' + songNumber + '</td>'
       + '  <td class="song-item-title">' + songName + '</td>'
-      + '  <td class="song-item-duration">' + songLength + '</td>'
+      + '  <td class="song-item-duration">' + filterTimeCode(songLength) + '</td>'
       + '</tr>'
       ;
- 
      var $row = $(template);
      
      var clickHandler = function(){
@@ -133,6 +132,7 @@ var updatePlayerBarSong = function() {
     $('.currently-playing .artist-song-mobile').text(currentSongFromAlbum.title + " - " + currentAlbum.artist);
     
     $('.main-controls .play-pause').html(playerBarPauseButton);
+    setTotalTimeInPlayerBar($(".song-item-duration")[currentlyPlayingSongNumber-1].innerHTML);
 
 };
     
@@ -171,7 +171,7 @@ var updateSeekBarWhileSongPlays = function() {
              var $seekBar = $('.seek-control .seek-bar');
  
              updateSeekPercentage($seekBar, seekBarFillRatio);
-             updateCurrentTime(seekBarFillRatio * currentSoundFile.getDuration());
+             setCurrentTimeInPlayerBar(seekBarFillRatio * currentSoundFile.getDuration());
          });
      }
  };
@@ -191,21 +191,40 @@ var updateSeekPercentage = function($seekBar, seekBarFillRatio){
 
 var seek = function(currentTime){
     currentSoundFile.setTime(currentTime);
-    updateCurrentTime(currentTime);
+    setCurrentTimeInPlayerBar(currentTime);
 }
 
-var updateCurrentTime = function(currentTime){
-    if(currentTime === 0){
-       $(".current-time").html("0:00"); 
-       return;
-    }
-    var seconds = Math.floor(currentTime % 60);  
-    var minutes = Math.floor(currentTime/60);
-    if(seconds<10){
-        seconds = "0" + seconds; 
-    }
-    $(".current-time").html(minutes + ":" + seconds);     
+var setCurrentTimeInPlayerBar = function(currentTime){
+
+    var newTimeCode = filterTimeCode(currentTime);
+    $(".current-time").html(newTimeCode);  
+    
 }
+
+var setTotalTimeInPlayerBar = function(totalTime){
+    console.log(totalTime);
+    $(".total-time").html(totalTime);
+    console.log(totalTime);
+    
+}
+
+var filterTimeCode = function(timeInSeconds){
+    //use parseFloat() method to get the seconds in number form.
+
+    timeInSeconds = parseFloat(timeInSeconds); 
+    
+    //Store variables for whole seconds and whole minutes (hint: use Math.floor() to round numbers down).
+    var seconds = Math.floor(timeInSeconds % 60);
+    var minutes = Math.floor(timeInSeconds/60);
+    
+    //Return the time in the format X:XX
+    if(seconds<10){
+        seconds = "0" + seconds;
+    } 
+    return (minutes + ":" + seconds);
+}
+
+
 var setupSeekBars = function(){
     
     var $seekBars = $('.player-bar .seek-bar');
