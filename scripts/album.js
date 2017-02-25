@@ -132,7 +132,9 @@ var updatePlayerBarSong = function() {
     $('.currently-playing .artist-song-mobile').text(currentSongFromAlbum.title + " - " + currentAlbum.artist);
     
     $('.main-controls .play-pause').html(playerBarPauseButton);
-    setTotalTimeInPlayerBar($(".song-item-duration")[currentlyPlayingSongNumber-1].innerHTML);
+    //setTotalTimeInPlayerBar($(".song-item-duration")[currentlyPlayingSongNumber-1].innerHTML);
+    
+    setTotalTimeInPlayerBar(currentSongFromAlbum.duration);
 
 };
     
@@ -202,9 +204,8 @@ var setCurrentTimeInPlayerBar = function(currentTime){
 }
 
 var setTotalTimeInPlayerBar = function(totalTime){
-    console.log(totalTime);
-    $(".total-time").html(totalTime);
-    console.log(totalTime);
+    
+    $(".total-time").html(filterTimeCode(totalTime));
     
 }
 
